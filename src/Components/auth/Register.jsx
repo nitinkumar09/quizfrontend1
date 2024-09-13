@@ -17,7 +17,7 @@ export const Register = () => {
     const { name, email, password, reEnterPassword } = user;
     if (name && email && password && password === reEnterPassword) {
       axios
-        .post("https://mern-quiz-server-sudhir.onrender.com/register", user)
+        .post("https://quiz-app-backend-2-wupl.onrender.com/register", user)
         .then((res) => {
           toast("Successfully Registered", {
             type: "success",
