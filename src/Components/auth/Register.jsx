@@ -15,9 +15,10 @@ export const Register = () => {
   const navigate = useNavigate();
   const register = () => {
     const { name, email, password, reEnterPassword } = user;
+    console.log(name, email, password);
     if (name && email && password && password === reEnterPassword) {
       axios
-        .post("https://quiz-app-backend-2-wupl.onrender.com/register", user)
+        .post("http://localhost:3755/register", user)
         .then((res) => {
           toast("Successfully Registered", {
             type: "success",

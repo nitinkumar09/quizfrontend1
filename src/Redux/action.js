@@ -110,7 +110,7 @@ const getAllUserDataFailure = (payload) => {
 export const getAllUserDataFromBackend = (payload) => (dispatch) => {
   dispatch(getAllUserDataRequest());
   axios
-    .get("https://quiz-app-backend-2-wupl.onrender.com/getuser")
+    .get("http://localhost:3755/getuser")
     .then((res) => {
       dispatch(getAllUserDataSuccess(res.data));
     })
@@ -121,7 +121,7 @@ export const getAllUserDataFromBackend = (payload) => (dispatch) => {
 
 export const deleteUserByAdmin = (payload) => (dispatch) => {
   axios
-    .delete(`https://quiz-app-backend-2-wupl.onrender.com/${payload}`)
+    .delete(`http://localhost:3755/${payload}`)
     .then((response) => {
       dispatch(getAllUserDataFromBackend());
     })
@@ -134,12 +134,12 @@ export const deleteUserByAdmin = (payload) => (dispatch) => {
 
 export const postQuizObj = (obj) => (dispatch) => {
   axios
-    .post("https://quiz-app-backend-2-wupl.onrender.com/admin", obj)
+    .post("http://localhost:3755/admin", obj)
     .then((res) => {
-     
+
     })
     .catch((err) => {
-      
+
     });
 };
 
@@ -165,16 +165,16 @@ const fetchQuizFailure = (payload) => {
 };
 export const fetchQuizDataFrombackend = () => (dispatch) => {
   axios
-    .get("https://quiz-app-backend-2-wupl.onrender.com/api/quiz")
+    .get("http://localhost:3755/api/quiz")
     .then((res) => dispatch(fetchQuizSuccess(res.data)))
     .catch((err) => console.log(err));
 };
 
 export const getQuiz = (params) => (dispatch) => {
   axios
-    .get(`https://quiz-app-backend-2-wupl.onrender.com/quiz/${params.id}`)
+    .get(`http://localhost:3755/quiz/${params.id}`)
     .then((res) => {
-    
+
       dispatch(fetchQuizSuccess(res.data));
     })
     .catch((err) => {
@@ -216,7 +216,7 @@ export const postQuizResult = (obj) => (dispatch) => {
   const { quizId, userId, quizResult } = obj;
   dispatch(postUserResultRequest());
   axios
-    .post(`https://quiz-app-backend-2-wupl.onrender.com/userResult/${userId}`, obj)
+    .post(`http://localhost:3755/userResult/${userId}`, obj)
     .then((res) => {
       dispatch(postUserResultSuccess(res.data));
     })

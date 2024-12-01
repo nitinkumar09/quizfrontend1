@@ -40,7 +40,7 @@ export const QuizForm = () => {
     setAns((prev) =>
       ans?.map((item) =>
         item.id === id
-          ? { ...item, [name]: value == "true" ? true : value }
+          ? { ...item, [name]: value === "true" ? true : value }
           : item
       )
     );

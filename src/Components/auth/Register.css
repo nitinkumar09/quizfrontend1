@@ -1,4 +1,4 @@
-.registermain{
+.registermain {
     height: 530px;
 }
 
@@ -13,11 +13,11 @@
     /* align-items: center; */
     text-align: center;
     /* margin-left: 40%; */
-    margin-top:2%;
-    height:425px
+    margin-top: 2%;
+    height: 425px
 }
 
-.register > input {
+.register>input {
     border-radius: 8px;
     border: 2px solid #dddfe2;
     outline: none;
@@ -38,9 +38,10 @@
     border-radius: 8px;
     outline: none;
     cursor: pointer;
-    width:300px;
+    width: 300px;
     margin-left: 24px;
 }
+
 .clicabledivRegsiter {
     background: #1877f2;
     border: 1px solid #1877f2;
@@ -51,6 +52,6 @@
     border-radius: 8px;
     outline: none;
     cursor: pointer;
-    width:300px;
+    width: 300px;
     margin-left: 8px;
 }

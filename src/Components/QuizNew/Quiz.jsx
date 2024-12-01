@@ -11,8 +11,8 @@ export const Quiz = (props) => {
   const data = useSelector((state) => state?.mernQuize?.QuizData);
   const result = useSelector((state) => state?.mernQuize?.result);
   const userID = useSelector((state) => state?.mernQuize?.userId);
-console.log("data",data)
-  const quizID = data[0]._id;
+  console.log("data", data)
+  const quizID = data.length > 0 ? data[0]._id : null;
   const dispatch = useDispatch();
 
   const [num, setNum] = useState(0);
@@ -33,39 +33,54 @@ console.log("data",data)
             {/* <video className="w-full" src="./businessanalysis.mp4" /> */}
           </div>
           <div className="flex w-4/5 pl-24 ml-12">
-            <h1 className="text-2xl m-2 text-black-400/25">{num + 1})</h1>
-            <h1 className="text-2xl m-2 text-black-400/25">
-              {questionArr[num]?.questions}
-            </h1>
+            {questionArr && questionArr[num] ? (
+              <>
+                <h1 className="text-2xl m-2 text-black-400/25">{num + 1})</h1>
+                <h1 className="text-2xl m-2 text-black-400/25">
+                  {questionArr[num]?.questions}
+                </h1>
+              </>
+            ) : (
+              <h1 className="text-2xl m-2 text-red-500">Invalid question</h1>
+            )}
           </div>
-          <div className="border-teal-500 rounded-2xl absolute  right-24 top-32 border-2 mb-8 p-1 pl-2  pr-2 ">
-            <h1 className="text-xl font-bold">
-              Attempted : {num + "/" + questionArr.length}
-            </h1>
+          <div className="border-teal-500 rounded-2xl absolute right-24 top-32 border-2 mb-8 p-1 pl-2 pr-2">
+            {questionArr ? (
+              <h1 className="text-xl font-bold">
+                Attempted: {num + "/" + questionArr.length}
+              </h1>
+            ) : (
+              <h1 className="text-xl font-bold text-red-500">Loading...</h1>
+            )}
           </div>
+
           <div className=" font-serif text-slate-900">
             {/* {num + "/" + (questionArr.length)} */}
           </div>
         </div>
-        <ol className=" w-3/5 ml-64" disabled={disable}>
-          {questionArr[num]?.options?.map((answer, index) => (
-            <li
-              key={index}
-              className={
-                index == disable && disable != null
-                  ? "show border border-gray-300 text-center cursor-pointer m-2 p-2 rounded-lg"
-                  : `notshow border border-gray-300 text-center cursor-pointer m-2 p-2 rounded-lg`
-              }
-              onClick={(e) => {
-                setAns([...ans, answer.option]);
-
-                handleQue(index);
-              }}
-            >
-              {answer.option}
-            </li>
-          ))}
+        <ol className="w-3/5 ml-64" disabled={disable}>
+          {questionArr && questionArr[num]?.options ? (
+            questionArr[num].options.map((answer, index) => (
+              <li
+                key={index}
+                className={
+                  index === disable && disable != null
+                    ? "show border border-gray-300 text-center cursor-pointer m-2 p-2 rounded-lg"
+                    : "notshow border border-gray-300 text-center cursor-pointer m-2 p-2 rounded-lg"
+                }
+                onClick={() => {
+                  setAns((prevAns) => [...prevAns, answer.option]);
+                  handleQue(index);
+                }}
+              >
+                {answer.option}
+              </li>
+            ))
+          ) : (
+            <li className="text-red-500">No options available</li>
+          )}
         </ol>
+
         <div className="mt-3 ml-80 pl-48">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-1"
@@ -98,15 +113,21 @@ console.log("data",data)
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded mr-1"
               onClick={() => {
-                setNum(num + 1);
-                setDisable(null);
-                if (questionArr.length - 2 == num) {
-                  setBtnshow(true);
+                if (questionArr && questionArr.length > 0) {
+                  setNum(num + 1);
+                  setDisable(null);
+
+                  if (questionArr.length - 2 === num) {
+                    setBtnshow(true);
+                  }
+                } else {
+                  console.error("questionArr is not defined or empty.");
                 }
               }}
             >
               Submit
             </button>
+
           )}
         </div>
       </div>

@@ -31,7 +31,7 @@ export const Login = () => {
 
   const login = () => {
     axios
-      .post("https://quiz-app-backend-2-wupl.onrender.com/login", user)
+      .post("http://localhost:3755/login", user)
       .then((res) => {
         if (res.data.user.email == "sudhirchavhan100@gmail.com") {
           dispatch(loginAdminId(res.data.user._id));
